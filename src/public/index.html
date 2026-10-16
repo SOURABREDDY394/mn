@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f9fc">
+  <meta name="description" content="Create a Google Wallet pass and keep its value current.">
+  <title>MN Pass — A pass that stays current</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="MN Pass home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-word">mn<span>.</span></span>
+        <span class="brand-divider"></span>
+        <span class="brand-product">PASS SYSTEM</span>
+      </a>
+      <div class="topbar-right">
+        <span class="topbar-note">GOOGLE WALLET · GENERIC PASS</span>
+        <div id="apiStatusBadge" class="status-pill status-checking" role="status" aria-live="polite">
+          <span class="status-dot"></span><span class="status-text">Checking connection</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> DIGITAL PASS INFRASTRUCTURE <span class="eyebrow-index">01 / 01</span></p>
+          <h1 id="heroTitle">A pass that<br><span>stays current.</span></h1>
+          <p class="hero-description">Issue a pass once. Update its value whenever you need to. The change travels straight to Google Wallet.</p>
+        </div>
+        <div class="hero-signal" aria-label="Pass data flow: create, sync, arrive in Wallet">
+          <div class="signal-track"><span class="signal-node signal-node-active"><i></i></span><span class="signal-line"><i></i></span><span class="signal-node"><i></i></span><span class="signal-line"><i></i></span><span class="signal-node signal-node-wallet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 6.5A2.5 2.5 0 0 1 7 4h11.5A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5H7a2.5 2.5 0 0 1-2.5-2.5z"/><path d="M4.5 8.5H19a2 2 0 0 1 2 2v4h-5.5a3 3 0 0 1 0-6H21"/><circle cx="17" cy="12.5" r=".75"/></svg></span></div>
+          <div class="signal-labels"><span>CREATE</span><span>SYNC</span><span>WALLET</span></div>
+          <p class="signal-caption"><span class="signal-caption-dot"></span> One pass. Always up to date.</p>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Pass builder">
+        <div class="builder-panel" id="create-pass">
+          <div class="panel-kicker"><span class="step-number">01</span><span>PASS DETAILS</span><span class="panel-rule"></span><span class="required-note">ALL FIELDS REQUIRED</span></div>
+          <div class="section-heading">
+            <div><h2>Create your pass</h2><p>Start with the details people will see.</p></div>
+            <span class="section-glyph" aria-hidden="true">↗</span>
+          </div>
+
+          <form id="createPassForm" class="pass-form">
+            <div class="field field-wide">
+              <label for="nameInput"><span>01</span> PASS HOLDER</label>
+              <div class="input-shell"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg><input type="text" id="nameInput" name="name" placeholder="e.g. Alex Morgan" maxlength="120" autocomplete="name" required></div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="labelInput"><span>02</span> VALUE LABEL</label>
+                <div class="input-shell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20 13-7.2 7.2a2 2 0 0 1-2.8 0L3 13.2V4h9.2z"/><circle cx="8" cy="8" r="1"/></svg><input type="text" id="labelInput" name="label" placeholder="e.g. Balance" maxlength="80" required></div>
+              </div>
+              <div class="field">
+                <label for="valueInput"><span>03</span> VALUE</label>
+                <div class="input-shell"><span class="value-symbol" aria-hidden="true">#</span><input type="number" id="valueInput" name="value" placeholder="e.g. 40" step="any" required></div>
+              </div>
+            </div>
+            <div id="createFeedback" class="feedback-box feedback-error" role="alert" hidden></div>
+            <button type="submit" id="createBtn" class="button button-primary"><span class="button-text btn-text">Create digital pass</span><span class="button-arrow" aria-hidden="true">↗</span><span class="button-spinner" aria-hidden="true"></span></button>
+            <p class="form-footnote"><span class="lock-mark" aria-hidden="true">✳</span> Your pass is created directly with Google Wallet.</p>
+          </form>
+
+          <section id="updateSection" class="update-panel" hidden aria-labelledby="updateTitle">
+            <div class="panel-kicker"><span class="step-number step-number-green">02</span><span>LIVE UPDATE</span><span class="panel-rule"></span></div>
+            <div class="section-heading update-heading"><div><h2 id="updateTitle">Change the value</h2><p>Google Wallet syncs the update to the saved pass.</p></div></div>
+            <div class="update-control">
+              <label class="sr-only" for="updateValueInput">New value</label>
+              <span class="update-label" id="updateLabelDisplay">Balance:</span>
+              <input type="number" id="updateValueInput" placeholder="Enter new value" step="any">
+              <button id="triggerUpdateBtn" class="button button-update"><span>Send update</span><span aria-hidden="true">↗</span></button>
+            </div>
+            <div id="updateFeedback" class="feedback-box" role="status" aria-live="polite" hidden></div>
+            <details class="request-details">
+              <summary><span>API request</span><span class="mono-route">POST /passes/{id}</span><span class="details-chevron">+</span></summary>
+              <div class="request-code"><pre><code id="curlCodeSnippet">Create a pass to generate its update request.</code></pre><button id="copyCurlBtn" class="copy-button" type="button">COPY</button></div>
+            </details>
+          </section>
+        </div>
+
+        <aside class="preview-panel" aria-labelledby="previewHeading">
+          <div class="preview-topline"><div><p class="panel-kicker preview-kicker"><span class="step-number">PREVIEW</span><span>GOOGLE WALLET</span></p><h2 id="previewHeading">Your pass,<br>in their pocket.</h2></div><span class="preview-arrow" aria-hidden="true">↘</span></div>
+
+          <div class="digital-card" id="digitalCard">
+            <div class="card-orbit card-orbit-one"></div><div class="card-orbit card-orbit-two"></div><div class="card-glow"></div>
+            <div class="digital-card-content">
+              <div class="card-top"><div class="card-issuer"><span class="issuer-logo"><i></i><i></i><i></i></span><span class="issuer-name">MN Pass</span></div><span class="card-type-tag">DIGITAL PASS</span></div>
+              <div class="card-body"><div class="card-field-group"><span class="field-caption">PASS HOLDER</span><span class="field-title" id="previewName">Your name</span></div><div class="card-field-group card-highlight-field"><span class="field-caption" id="previewLabel">YOUR VALUE</span><span class="field-value-huge" id="previewValue">—</span></div></div>
+              <div class="card-bottom"><div class="pass-id-info"><span class="field-caption">UNIQUE PASS ID</span><span class="pass-id-text" id="previewPassId">GENERATED ON CREATE</span></div><span class="card-chip" aria-hidden="true"><i></i></span></div>
+            </div>
+          </div>
+
+          <div class="wallet-actions">
+            <div class="qr-code-wrapper" id="qrContainer" hidden><div class="qr-frame"><img id="qrImage" src="" alt="QR code containing the unique pass ID"></div><div class="qr-meta"><span class="qr-caption">UNIQUE PASS ID</span><span>Scan to verify</span></div></div>
+            <div id="saveBtnContainer" class="save-button-wrapper" hidden><a id="googleWalletLink" href="#" target="_blank" rel="noopener noreferrer" class="google-wallet-btn"><img src="https://raw.githubusercontent.com/google-pay/wallet-samples/main/assets/google-wallet-button.png" alt="Add to Google Wallet" class="wallet-badge-img"><span class="wallet-fallback">Add to Google Wallet <b>↗</b></span></a><p class="save-tip">Open this link on an Android device with Google Wallet.</p></div>
+            <div id="placeholderNotice" class="placeholder-notice"><span class="placeholder-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z"/><path d="M4 9h16M7 15h3"/></svg></span><span>Pass preview updates as you type.</span></div>
+          </div>
+          <div class="preview-foot"><span class="preview-foot-dot"></span><span>LIVE DATA · GOOGLE WALLET OBJECTS API</span></div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer"><a class="footer-brand" href="/">MN<span>.</span></a><span>BUILT FOR THE MOMENT AFTER THE PASS IS SAVED.</span><span class="footer-index">WALLET SYSTEM / 001</span></footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

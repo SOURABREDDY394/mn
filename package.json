@@ -1,0 +1,38 @@
+{
+  "name": "mn-wallet-pass",
+  "version": "1.0.0",
+  "description": "Minimal backend and web interface to issue digital passes to Google Wallet and update them live",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc && node --input-type=module -e \"import { cpSync } from 'node:fs'; cpSync('src/public', 'dist/public', { recursive: true })\"",
+    "start": "node dist/server.js"
+  },
+  "keywords": [
+    "google-wallet",
+    "digital-pass",
+    "passes",
+    "wallet-api",
+    "live-update"
+  ],
+  "author": "Sourab Reddy",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "google-auth-library": "^10.9.1",
+    "jsonwebtoken": "^9.0.2",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.25",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/node": "^22.13.4",
+    "@types/qrcode": "^1.5.5",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}
