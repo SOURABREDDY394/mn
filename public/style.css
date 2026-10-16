@@ -181,14 +181,9 @@ a { color: inherit; }
 .qr-meta { display: flex; min-width: 0; flex-direction: column; gap: 6px; color: var(--muted); font-size: 11px; }
 .qr-caption { color: var(--ink-2); font: 9px var(--mono); letter-spacing: .08em; }
 .save-button-wrapper { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
-.google-wallet-btn { position: relative; display: flex; align-items: center; justify-content: center; min-height: 48px; width: 100%; overflow: hidden; border-radius: 7px; background: #000; text-decoration: none; transition: transform .2s, box-shadow .2s; }
-.google-wallet-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.18); }
-.wallet-badge-img { display: block; width: auto; height: 42px; max-width: calc(100% - 20px); object-fit: contain; }
-.wallet-fallback { display: none; color: white; font-size: 13px; font-weight: 600; }
-.google-wallet-btn img:not([src]), .google-wallet-btn img[src=""] { display: none; }
-.google-wallet-btn img.badge-error { display: none; }
-.google-wallet-btn:has(.badge-error) .wallet-fallback { display: inline-flex; align-items: center; gap: 12px; }
-.wallet-fallback b { color: #a9f2ff; font-size: 17px; font-weight: 400; }
+.google-wallet-btn { display: block; width: min(100%, 283px); min-height: 50px; border-radius: 25px; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+.google-wallet-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.16); }
+.wallet-badge-img { display: block; width: 100%; height: auto; }
 .save-tip { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
 .placeholder-notice { display: flex; align-items: center; gap: 10px; padding: 11px 13px; border: 1px dashed #d6e0e9; border-radius: 8px; color: var(--muted); font-size: 11px; }
 .placeholder-icon { display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 auto; border-radius: 7px; background: #f0efff; color: var(--purple); }
@@ -254,8 +249,7 @@ a { color: inherit; }
   .qr-frame img { width: 48px; height: 48px; }
   .qr-meta { font-size: 10px; }
   .qr-caption { font-size: 8px; }
-  .google-wallet-btn { width: 160px; min-height: 43px; }
-  .wallet-badge-img { height: 36px; }
+  .google-wallet-btn { width: min(100%, 283px); min-height: 50px; }
   .save-tip { max-width: 170px; font-size: 10px; }
   .placeholder-notice { min-height: 54px; }
   .preview-foot { margin-top: 15px; font-size: 8px; }
@@ -276,7 +270,7 @@ a { color: inherit; }
   .field-row { grid-template-columns: 1fr; gap: 15px; }
   .wallet-actions { grid-template-columns: minmax(0, 1fr); }
   .save-button-wrapper { align-items: flex-start; }
-  .google-wallet-btn { width: 100%; }
+  .google-wallet-btn { width: min(100%, 283px); }
   .save-tip { max-width: none; }
   .footer-brand { font-size: 19px; }
 }

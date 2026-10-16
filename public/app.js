@@ -166,8 +166,4 @@ copyCurlBtn.addEventListener('click', async () => {
   }
 });
 
-googleWalletLink.querySelector('img').addEventListener('error', (event) => {
-  event.currentTarget.classList.add('badge-error');
-});
-
 checkApiStatus();
