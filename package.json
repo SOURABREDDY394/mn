@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc && node --input-type=module -e \"import { cpSync } from 'node:fs'; cpSync('src/public', 'dist/public', { recursive: true })\"",
+    "build": "tsc",
     "start": "node dist/server.js"
   },
   "keywords": [

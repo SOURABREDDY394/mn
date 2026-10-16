@@ -21,7 +21,8 @@ app.use(express.json({ limit: '16kb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Serve frontend assets
-const publicPath = path.join(__dirname, 'public');
+// Root public/ is served by Vercel's CDN and by Express during local runs.
+const publicPath = path.resolve(__dirname, '..', 'public');
 app.use(express.static(publicPath));
 
 // Initialize Providers & Service
@@ -52,22 +53,25 @@ app.get('*', (_req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-// Start Server
-app.listen(PORT, async () => {
-  console.log(`\n======================================================`);
-  console.log(`🚀 Google Wallet Pass Issuer Server running on:`);
-  console.log(`   👉 http://localhost:${PORT}`);
-  console.log(`======================================================`);
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, async () => {
+    console.log(`\n======================================================`);
+    console.log(`🚀 Google Wallet Pass Issuer Server running on:`);
+    console.log(`   👉 http://localhost:${PORT}`);
+    console.log(`======================================================`);
 
-  try {
-    await passService.initialize();
-  } catch (err) {
-    console.warn('Initialization note:', (err as Error).message);
-  }
+    try {
+      await passService.initialize();
+    } catch (err) {
+      console.warn('Initialization note:', (err as Error).message);
+    }
 
-  console.log(`\nReady to accept requests:`);
-  console.log(`- Web UI:       http://localhost:${PORT}`);
-  console.log(`- Create Pass:  POST http://localhost:${PORT}/api/passes`);
-  console.log(`- Update Pass:  POST http://localhost:${PORT}/passes/:id`);
-  console.log(`- Healthcheck:  GET  http://localhost:${PORT}/api/status\n`);
-});
+    console.log(`\nReady to accept requests:`);
+    console.log(`- Web UI:       http://localhost:${PORT}`);
+    console.log(`- Create Pass:  POST http://localhost:${PORT}/api/passes`);
+    console.log(`- Update Pass:  POST http://localhost:${PORT}/passes/:id`);
+    console.log(`- Healthcheck:  GET  http://localhost:${PORT}/api/status\n`);
+  });
+}
+
+export default app;

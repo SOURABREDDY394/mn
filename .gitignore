@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.vercel/
 .env
 service_account.json
 *.key
@@ -7,3 +8,5 @@ service_account.json
 *.log
 .DS_Store
 Thumbs.db
+
+.vercel

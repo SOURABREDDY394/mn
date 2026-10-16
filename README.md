@@ -10,6 +10,8 @@ A focused pass builder and TypeScript API for issuing a digital pass once, then 
 ![TypeScript](https://img.shields.io/badge/TypeScript-Express-3178C6?logo=typescript&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-7564FF.svg)
 
+[Open the live Vercel preview ↗](https://mn-ebon-rho.vercel.app)
+
 </div>
 
 ## Preview
@@ -124,13 +126,15 @@ src/
   core/              Shared pass types
   providers/         Wallet provider contract and integrations
   services/          Pass workflows and provider selection
-  public/            Responsive web interface
+public/              Responsive web interface and Vercel static assets
 docs/screenshots/    README screenshots
 ```
 
 ## Deploy
 
-Deploy as a Node.js web service. Use `npm ci` to install, `npm run build` to build, and `npm start` to run. Set the Wallet credentials as host secrets, set `PUBLIC_ORIGIN` to the deployed HTTPS origin, and use `/api/health` as the health-check path if your host supports one.
+The app is deployed at [mn-ebon-rho.vercel.app](https://mn-ebon-rho.vercel.app). The UI and API are live, and `/api/health` returns `ok`. Google Wallet credentials are not configured on this deployment yet, so creating or updating real passes remains disabled until the issuer is set up. The production `PUBLIC_ORIGIN` is configured.
+
+To enable pass issuance, add `GOOGLE_WALLET_ISSUER_ID`, `GOOGLE_CLIENT_EMAIL`, and `GOOGLE_PRIVATE_KEY` as production environment variables in Vercel, then redeploy. Keep the private key in Vercel's secret environment settings. To deploy from this checkout, run `npx vercel --prod`; connect the Vercel project to this GitHub repository in Vercel's project settings if you want pushes to deploy automatically.
 
 ## License
 
