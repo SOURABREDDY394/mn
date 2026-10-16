@@ -189,4 +189,4 @@ After deployment, check `/api/health` and `/api/status`, create a pass with an a
 
 ## License
 
-MIT. See [LICENSE](LICENSE) if present in the repository.
+MIT. See [LICENSE](LICENSE).
